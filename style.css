@@ -1,0 +1,19 @@
+
+#main-container {
+    width: 80%; /* Adjust width as needed */
+    margin: 0 auto; /* Center horizontally */
+    text-align: center; /* Center children horizontally */
+    background-color: #CAD2C5; /* Background color */
+    color: #2F3E46; /* Text color */
+}
+
+#dropdown {
+    margin-bottom: 20px; /* Add some space between the dropdown and content */
+    background-color: #84A98C; /* Background color */
+}
+
+#content {
+    border: 2px solid #354F52; /* Border color */
+    padding: 20px;
+    text-align: left;
+}
