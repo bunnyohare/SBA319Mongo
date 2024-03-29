@@ -28,11 +28,7 @@ router.post("/", async (req, res) => {
     const usersCollection = getUsersCollection();
     const newUser = req.body;
     const result = await usersCollection.insertOne(newUser);
-    if (result.insertedCount === 1) {
-      res.status(201).json(result.ops[0]); // Successfully created
-    } else {
-      res.status(500).json({ error: "Failed to create user" });
-    }
+    res.json({ message: "User inserted successfully" });
   } catch (error) {
     console.error("Error creating user:", error);
     res.status(500).json({ error: "Internal Server Error" });
