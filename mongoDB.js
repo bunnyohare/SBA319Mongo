@@ -11,7 +11,7 @@ const client = new MongoClient(uri, {
   },
 });
 
-async function runDB() {
+async function connectDB() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
@@ -25,6 +25,30 @@ async function runDB() {
     await client.close();
   }
 }
-runDB().catch(console.dir);
+connectDB().catch(console.dir);
 
-module.exports = { runDB };
+async function fetchDataFromDatabase() {
+  try {
+    await client.connect();
+    console.log("Connected to the database");
+
+    const database = client.db("SBA319Mongo");
+    const collection = database.collection("Users");
+
+    // Query for documents
+    const query = { username: "Bret" };
+    const options = {};
+    const result = await collection.find(query, options).toArray();
+
+    await client.close();
+    console.log("Retrieved documents:", result);
+    return result; // Return the retrieved documents if needed
+  } catch (error) {
+    console.error("Error fetching data from the database:", error);
+  } finally {
+    await client.close();
+    console.log("Connection closed");
+  }
+}
+
+module.exports = { connectDB, fetchDataFromDatabase };
