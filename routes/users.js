@@ -1,26 +1,8 @@
-require("dotenv").config();
 const express = require("express");
 const router = express.Router();
-const { MongoClient, ObjectId } = require("mongodb");
+const { ObjectId } = require("mongodb");
+const { getUsersCollection } = require("../mongoDB");
 
-const uri = process.env.MONGO_URI;
-const client = new MongoClient(uri);
-
-// Connect to MongoDB
-async function connectDB() {
-  try {
-    await client.connect();
-    console.log("Connected to MongoDB");
-  } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
-  }
-}
-connectDB();
-
-// Helper function to get the users collection
-function getUsersCollection() {
-  return client.db("SBA319Mongo").collection("Users");
-}
 
 // CREATE - POST a new user
 router.post("/", async (req, res) => {

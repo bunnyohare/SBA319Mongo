@@ -1,50 +1,55 @@
-require("dotenv").config();
 const express = require("express");
 const app = express();
 const port = 5005;
-const bodyParser = require("body-parser");
-const userRoutes = require("./routes/users");
-const postRoutes = require("./routes/posts");
-const commentRoutes = require("./routes/comments");
-const cors = require("cors"); // Import the cors module
+const cors = require("cors");
+const { getUsersCollection } = require("./mongoDB");
+const { getPostsCollection } = require("./mongoDB");
 
-async function startServer() {
+// Set EJS as the view engine
+app.set("view engine", "ejs");
+
+// Set the directory for views
+app.set("views", "./views");
+
+// Middleware
+app.use(cors());
+app.use(express.json()); // Add this line to enable JSON body parsing
+
+
+// Import routes
+const usersRouter = require("./routes/users");
+const postsRouter = require("./routes/posts");
+
+// Use routes
+app.use("/api/user", usersRouter);
+app.use("/api/post", postsRouter);
+
+// Define route handler for the index page
+app.get("/", async (req, res) => {
   try {
-   // Set up middleware
-    app.use(cors()); // Enable CORS for all routes
-    const logReq = function (req, res, next) {
-      console.log("Request Received");
-      next();
-    };
-    app.use(logReq);
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(bodyParser.json({ extended: true }));
+    // Fetch users and posts data from your database
+    const usersCursor = await getUsersCollection().find({}); // Assuming you have a function to fetch users
+    const postsCursor = await getPostsCollection().find({}); // Assuming you have a function to fetch posts
 
-    // Set up routes
-    app.use("/api/user", userRoutes);
-    app.use("/api/post", postRoutes);
-    app.use("/api/comment", commentRoutes);
+    // Convert the cursors to arrays of documents
+    const users = await usersCursor.toArray();
+    const posts = await postsCursor.toArray();
 
-    app.get("/", (req, res) => {
-      res.send("Work in progress");
-    });
-
-    // Lesson error handling middleware
-    app.use((req, res) => {
-      res.status(404);
-      res.json({ error: `Sorry, resource not found` });
-    });
-
-    // Start the server
-    app.listen(port, () => {
-      console.log(`Server listening on port: ${port}`);
-    });
-  } catch (err) {
-    console.error("Error connecting to MongoDB:", err);
-    // Exit process if failed to connect to MongoDB
-    process.exit(1);
+    // Render the index page and pass users and posts data to the view template
+    res.render("index", { users: users, posts: posts });
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
-}
+});
 
-// Call the startServer function
-startServer();
+
+// Error handling middleware
+app.use((req, res) => {
+  res.status(404).json({ error: `Sorry, resource not found` });
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server listening on port: ${port}`);
+});
