@@ -3,12 +3,22 @@ const router = express.Router();
 const { ObjectId } = require("mongodb");
 const { getUsersCollection } = require("../mongoDB");
 
+// Simple email validation using regular expression
+const isValidEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
 
 // CREATE - POST a new user
 router.post("/", async (req, res) => {
   try {
-    const usersCollection = getUsersCollection();
     const newUser = req.body;
+
+    // Validate email format
+    if (!isValidEmail(newUser.email)) {
+      return res.status(400).json({ error: "Invalid email format" });
+    }
+    const usersCollection = getUsersCollection();
     const result = await usersCollection.insertOne(newUser);
     res.json({ message: "User inserted successfully" });
   } catch (error) {
