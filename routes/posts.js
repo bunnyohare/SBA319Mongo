@@ -4,7 +4,7 @@ const { ObjectId } = require("mongodb");
 const { getPostsCollection } = require("../mongoDB");
 
 
-// CREATE - POST a new user
+// CREATE - POST a new post
 router.post("/", async (req, res) => {
   try {
     const postsCollection = getPostsCollection();
@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
 });
 
 
-// READ - GET all users
+// READ - GET all posts
 router.get("/", async (req, res) => {
   try {
     const postsCollection = getPostsCollection();
@@ -35,7 +35,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// READ - GET a single user by ID
+// READ - GET a single post by ID
 router.get("/:id", async (req, res) => {
   const objectId = new ObjectId(req.params.id);
   try {
@@ -51,10 +51,10 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// UPDATE - PUT to update a user by ID
+// UPDATE - PUT to update a post by ID
 router.put("/:id", async (req, res) => {
   const objectId = new ObjectId(req.params.id);
-  const newPostTitle = req.body.title; // Use req.body.username to access the username from the request body
+  const newPostTitle = req.body.title; // Use req.body.title to access the title from the request body
   const update = {
     $set: {
       title: newPostTitle,
@@ -74,14 +74,14 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// DELETE - DELETE a user by ID
+// DELETE - DELETE a post by ID
 router.delete("/:id", async (req, res) => {
   const objectId = new ObjectId(req.params.id);
   try {
     const postsCollection = getPostsCollection();
     const result = await postsCollection.deleteOne({ _id: objectId });
     if (result.deletedCount === 0) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ error: "Post not found" });
     }
     res.json({ message: "Post deleted successfully" });
   } catch (error) {

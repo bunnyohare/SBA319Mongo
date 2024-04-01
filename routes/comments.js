@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const comments = require("../data/comments");
-const fs = require('fs');
-const path = require("path");
+const { ObjectId } = require("mongodb");
+const { getCommentsCollection } = require("../mongoDB");
 
 
 // middleware that is specific to this router
@@ -11,88 +10,91 @@ router.use((req, res, next) => {
   next();
 });
 
-// route for /comment
-router
-  .route("/")
-  .get((req, res) => {
+// CREATE - POST a new comment
+router.post("/", async (req, res) => {
+  try {
+    const commentsCollection = getCommentsCollection();
+    const newComment = {
+      postId: req.body.postId,
+      id: req.body.id,
+      name: req.body.name,
+      email: req.body.email,
+      body: req.body.body
+    };
+    const result = await commentsCollection.insertOne(newComment);
+    res.json({ message: "Comment inserted successfully" });
+  } catch (error) {
+    console.error("Error creating comment:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// READ - GET all comments
+router.get("/", async (req, res) => {
+  try {
+    const commentsCollection = getCommentsCollection();
+    const comments = await commentsCollection.find({}).toArray();
     res.json(comments);
-  })
-  .post((req, res) => {
-    if (req.body.postId && req.body.name && req.body.email && req.body.body) {
-        if (comments.find((c) => c.email == req.body.email)) {
-            res.json({ error: `One comment per email address.` });
-            return;
-        }
-            const newComment = {
-                postId: req.body.postId,
-                id: comments[comments.length - 1].id + 1,
-                id: req.body.id,
-                name: req.body.name,
-                email: req.body.email,
-                body: req.body.body
-            };
-            comments.push(newComment);
+  } catch (error) {
+    console.error("Error fetching comments:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
-
-        // Read existing posts data
-        fs.writeFile(
-          path.join(__dirname, "../data/comments.js"),
-          `const comments = ${JSON.stringify(
-            comments,
-            null,
-            2
-          )};\n\nmodule.exports = comments;`,
-          (err) => {
-            if (err) {
-              console.error("Error writing to comments file:", err);
-              return res.status(500).json({ error: "Error adding comment" });
-            }
-            // Returning the newly added user
-            res.json(newComment);
-          }
-        );
-      } else {
-        res.json({ error: "Insufficient Data" });
-      }
-    });
-
-// Route for /comment/ID_OF_COMMENT
-router
-  .route("/:id")
-  .get((req, res, next) => {
-    try {
-      const comment = comments.find((p) => p.id === parseInt(req.params.id));
-      if (!comment) {
-        // Comment not found, send 404 response
-        return res.status(404).send("Post not found");
-      }
-      res.json(comment);
-    } catch (error) {
-      // Handle errors
-      console.error(error);
-      next(error);
+// READ - GET a single comment by ID
+router.get("/:id", async (req, res) => {
+  const objectId = new ObjectId(req.params.id);
+  try {
+    const commentsCollection = getCommentsCollection();
+    const comment = await commentsCollection.findOne({ _id: objectId });
+    if (!comment) {
+      return res.status(404).json({ error: "Comment not found" });
     }
-  })
-  .delete((req, res) => {
-    const commentId = parseInt(req.params.id);
-    const index = comments.findIndex(comment => comment.id === commentId);
+    res.json(comment);
+  } catch (error) {
+    console.error("Error fetching comment:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
-    if (index === -1) {
-      return res.status(404).send("Comment not found");
+// UPDATE - PUT to update a comment by ID
+router.put("/:id", async (req, res) => {
+  const objectId = new ObjectId(req.params.id);
+  const newCommentName = req.body.name; // Use req.body.name to access the name from the request body
+  const update = {
+    $set: {
+      name: newCommentName,
+    },
+  };
+
+  try {
+    const commentsCollection = getCommentsCollection();
+    const result = await commentsCollection.updateOne({ _id: objectId }, update);
+    if (result.modifiedCount === 0) {
+      return res.status(404).json({ error: "Comment not found" });
     }
+    res.json({ message: "Comment updated successfully" });
+  } catch (error) {
+    console.error("Error updating Comment:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
-    // Remove the user from the users array
-    const deletedComment = comments.splice(index, 1)[0];
 
-    // Save the updated users array to the file
-    fs.writeFile('./data/comments.js', `const comments = ${JSON.stringify(comments, null, 2)};\n\nmodule.exports = comments;`, (err) => {
-      if (err) {
-        console.error("Error writing to comments file:", err);
-        return res.status(500).json({ error: "Error deleting comment" });
-      }
-      // Return the deleted comment
-      res.json(deletedComment);
-    });
-  });
+// DELETE - DELETE a comment by ID
+router.delete("/:id", async (req, res) => {
+  const objectId = new ObjectId(req.params.id);
+  try {
+    const commentsCollection = getCommentsCollection();
+    const result = await commentsCollection.deleteOne({ _id: objectId });
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ error: "Comment not found" });
+    }
+    res.json({ message: "Comment deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting Comment:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 module.exports = router;

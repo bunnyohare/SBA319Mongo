@@ -21,5 +21,11 @@
             <li><%= post.title %></li>
         <% }); %>
     </ul>
+    <h2>Comments</h2>
+    <ul>
+        <% comments.forEach(comment => { %>
+            <li><%= comment.name %></li>
+        <% }); %>
+    </ul>
 </body>
 </html>
