@@ -2,14 +2,26 @@ const express = require("express");
 const router = express.Router();
 const { ObjectId } = require("mongodb");
 const { getPostsCollection } = require("../mongoDB");
+const { getUsersCollection } = require("../mongoDB");
 
 
 // CREATE - POST a new post
 router.post("/", async (req, res) => {
   try {
+    const userId = req.body.userId;
+
+    // Check if the user exists befor they are allowed to input a new post.
+    const userCollection = getUsersCollection();
+    const user = await userCollection.findOne({ id: userId });
+
+    if (!user) {
+      return res.status(400).json({ error: "User does not exist" });
+    }
+
+    // User exists, we can proceed with creating the post
     const postsCollection = getPostsCollection();
     const newPost = {
-      userId: req.body.userId,
+      userId: userId,
       id: req.body.id,
       title: req.body.title,
       body: req.body.body
