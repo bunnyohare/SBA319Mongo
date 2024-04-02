@@ -23,13 +23,6 @@ For http://localhost:5500/index.html
 I have created and rendered a view using a view template and template engine. This allows users to easily view the usernames of all users in the DB, the title of all posts in the db and the name of all the comments in the db in one page. It's not super pretty, but could later be modified and re-used to create a drop-down for each type.
 
 
-http://localhost:5005/api/post/user/ID_OF_USER
-
-Known defects:
-
-Have yet to implement :
-
-Include sensible indexes for any and all fields that are queried frequently. For fields that may have a high write-to-read ratio, you may forgo indexes for performance considerations. Make comments of this where applicable.
 
 
 Credits:

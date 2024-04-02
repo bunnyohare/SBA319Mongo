@@ -1,33 +1,24 @@
-// database.js
 require("dotenv").config();
-const { MongoClient } = require("mongodb");
+const mongoose = require("mongoose");
+const Users = require("./models/user"); // Import the User model
 
 const uri = process.env.MONGO_URI;
-const client = new MongoClient(uri);
 
-// Function to connect to MongoDB
-async function connectDB() {
-  try {
-    await client.connect();
+// Connect to MongoDB using Mongoose
+mongoose
+  .connect(uri)
+  .then(async () => {
     console.log("Connected to MongoDB");
-  } catch (error) {
+  })
+  .catch((error) => {
     console.error("Error connecting to MongoDB:", error);
-  }
-}
+    process.exit(1); // Terminate the process if unable to connect to MongoDB
+  });
 
-// Function to get the users collection
-function getUsersCollection() {
-  return client.db("SBA319Mongo").collection("Users");
-}
+// Event listener for connection error
+mongoose.connection.on("error", (error) => {
+  console.error("Error connecting to MongoDB:", error);
+  process.exit(1); // Terminate the process if unable to connect to MongoDB
+});
 
-// Function to get the posts collection
-function getPostsCollection() {
-  return client.db("SBA319Mongo").collection("Posts");
-}
-
-// Function to get the posts collection
-function getCommentsCollection() {
-  return client.db("SBA319Mongo").collection("Comments");
-}
-
-module.exports = { connectDB, getUsersCollection, getPostsCollection, getCommentsCollection };
+module.exports = mongoose; // Export the mongoose instance
