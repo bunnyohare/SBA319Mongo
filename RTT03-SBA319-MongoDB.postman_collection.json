@@ -76,7 +76,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{  \"id\": 1,\n  \"name\": \"Leanne Graham\",\n  \"username\": \"Hoppy\",\n  \"email\": \"Sincere@april.biz\",\n  \"address\": {\n    \"street\": \"Kulas Light\",\n    \"suite\": \"Apt. 556\",\n    \"city\": \"Gwenborough\",\n    \"zipcode\": \"92998-3874\",\n    \"geo\": {\n      \"lat\": \"-37.3159\",\n      \"lng\": \"81.1496\"\n    }\n  },\n  \"phone\": \"1-770-736-8031 x56442\",\n  \"website\": \"hildegard.org\",\n  \"company\": {\n    \"name\": \"Romaguera-Crona\",\n    \"catchPhrase\": \"Multi-layered client-server neural-net\",\n    \"bs\": \"harness real-time e-markets\"\n  }\n}",
+					"raw": "{  \"id\": 1,\n  \"name\": \"Leanne Graham\",\n  \"username\": \"fsadkljf\",\n  \"email\": \"Sincere@april.biz\",\n  \"address\": {\n    \"street\": \"Kulas Light\",\n    \"suite\": \"Apt. 556\",\n    \"city\": \"Gwenborough\",\n    \"zipcode\": \"92998-3874\",\n    \"geo\": {\n      \"lat\": \"-37.3159\",\n      \"lng\": \"81.1496\"\n    }\n  },\n  \"phone\": \"1-770-736-8031 x56442\",\n  \"website\": \"hildegard.org\",\n  \"company\": {\n    \"name\": \"Romaguera-Crona\",\n    \"catchPhrase\": \"Multi-layered client-server neural-net\",\n    \"bs\": \"harness real-time e-markets\"\n  }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -84,7 +84,12 @@
 					}
 				},
 				"url": {
-					"raw": "/api/user/660311cf17d79dc0ea58a6c3?username=Hoppy",
+					"raw": "http://localhost:5005/api/user/660311cf17d79dc0ea58a6c3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5005",
 					"path": [
 						"api",
 						"user",
@@ -93,7 +98,8 @@
 					"query": [
 						{
 							"key": "username",
-							"value": "Hoppy"
+							"value": "Hoppy",
+							"disabled": true
 						}
 					]
 				}
@@ -404,6 +410,43 @@
 						"api",
 						"comment",
 						"660ab88f26aa6c98025581c5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /api/user/660311cf17d79dc0ea58a6c3",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \"id\": 1,\n  \"name\": \"Leanne Graham\",\n  \"username\": \"fsadkljf\",\n  \"email\": \"Sincere@april.biz\",\n  \"address\": {\n    \"street\": \"Kulas Light\",\n    \"suite\": \"Apt. 556\",\n    \"city\": \"Gwenborough\",\n    \"zipcode\": \"92998-3874\",\n    \"geo\": {\n      \"lat\": \"-37.3159\",\n      \"lng\": \"81.1496\"\n    }\n  },\n  \"phone\": \"1-770-736-8031 x56442\",\n  \"website\": \"hildegard.org\",\n  \"company\": {\n    \"name\": \"Romaguera-Crona\",\n    \"catchPhrase\": \"Multi-layered client-server neural-net\",\n    \"bs\": \"harness real-time e-markets\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5005/api/user/660311cf17d79dc0ea58a6c3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5005",
+					"path": [
+						"api",
+						"user",
+						"660311cf17d79dc0ea58a6c3"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "Hoppy",
+							"disabled": true
+						}
 					]
 				}
 			},
