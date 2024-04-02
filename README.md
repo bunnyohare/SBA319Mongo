@@ -1,4 +1,4 @@
-To test/use this API please create a MongoDB Database called SBA319Mongo and then load the database with the JSON data stored in the three files that are contained in the data folder. Call these collections Comments, Posts, and Users.
+To test/use this API please create a MongoDB Database called SBA319Mongo and then load the database with the JSON data stored in the three files that are contained in the data folder. Call these collections Comments, Posts, and Users.  Run npm install to get the node_modules.
 
 Create a .env file which includes the following:
 
