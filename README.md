@@ -1,6 +1,6 @@
 Create a MongoDB Database called SBA319Mongo load the database with the JSON data stored in the three files that are contained in thte data folder. Call these collections Comments, Posts, and Users.
 
-Create a .env file which
+Create a .env file which includes the following:
 
 PORT=5005
 MONGO_URI=mongodb+srv://<MONGO_USERNAME>:<MONGO_PASSWORD>@<MongoDB_DATABAS_INFO>
