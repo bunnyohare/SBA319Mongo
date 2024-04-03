@@ -50,7 +50,7 @@ router.get("/", async (req, res) => {
 // READ - GET a single post by ID
 router.get("/:id", async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findOne({ id: req.params.id });
     if (!post) {
       return res.status(404).json({ error: "Post not found" });
     }
@@ -61,21 +61,27 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// UPDATE - PUT to update a post by ID
+// PUT - Update a post by ID
 router.put("/:id", async (req, res) => {
   try {
-    await Post.findByIdAndUpdate(req.params.id, req.body);
-    res.json({ message: "Post updated successfully" });
+    const updatedPost = await Post.findOneAndUpdate({ id: req.params.id }, req.body, { new: true });
+    if (!updatedPost) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+    res.json({ message: "Post updated successfully", post: updatedPost });
   } catch (error) {
     console.error("Error updating post:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-// DELETE - DELETE a post by ID
+// DELETE - Delete a post by ID
 router.delete("/:id", async (req, res) => {
   try {
-    await Post.findByIdAndDelete(req.params.id);
+    const deletedPost = await Post.findOneAndDelete({ id: req.params.id });
+    if (!deletedPost) {
+      return res.status(404).json({ error: "Post not found" });
+    }
     res.json({ message: "Post deleted successfully" });
   } catch (error) {
     console.error("Error deleting post:", error);

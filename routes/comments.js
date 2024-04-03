@@ -17,10 +17,14 @@ router.post("/", async (req, res) => {
     if (!isValidEmail(newEmail)) {
       return res.status(400).json({ error: "Invalid email address format" });
     }
-  // Find the document with the highest ID
-  const highestIdComment = await Comment.findOne({}, {}, { sort: { 'id': -1 } });
-  // Generate a new ID by incrementing the highest ID by 1
-  const newId = highestIdComment ? highestIdComment.id + 1 : 1;
+    // Find the document with the highest ID
+    const highestIdComment = await Comment.findOne(
+      {},
+      {},
+      { sort: { id: -1 } }
+    );
+    // Generate a new ID by incrementing the highest ID by 1
+    const newId = highestIdComment ? highestIdComment.id + 1 : 1;
     // Create the new post with the generated ID
     const newCommentData = {
       postID: req.body.postID,
@@ -52,7 +56,7 @@ router.get("/", async (req, res) => {
 // READ - GET a single comment by ID
 router.get("/:id", async (req, res) => {
   try {
-    const comment = await Comment.findById(req.params.id);
+    const comment = await Comment.findOne({ id: req.params.id });
     if (!comment) {
       return res.status(404).json({ error: "Comment not found" });
     }
@@ -63,13 +67,16 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// UPDATE - PUT to update a comment by ID
+// PUT - Update a comment by ID
 router.put("/:id", async (req, res) => {
   try {
-    await Comment.findByIdAndUpdate(req.params.id, req.body);
-    res.json({ message: "Comment updated successfully" });
+    const updatedComment = await Comment.findOneAndUpdate({ id: req.params.id }, req.body, { new: true });
+    if (!updatedComment) {
+      return res.status(404).json({ error: "Comment not found" });
+    }
+    res.json({ message: "Comment updated successfully", comment: updatedComment });
   } catch (error) {
-    console.error("Error updating comment:", error);
+    console.error("Error updating post:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
@@ -77,7 +84,7 @@ router.put("/:id", async (req, res) => {
 // DELETE - DELETE a comment by ID
 router.delete("/:id", async (req, res) => {
   try {
-    await Comment.findByIdAndDelete(req.params.id);
+    await Comment.findOneAndDelete({ id: req.params.id });
     res.json({ message: "Comment deleted successfully" });
   } catch (error) {
     console.error("Error deleting comment:", error);

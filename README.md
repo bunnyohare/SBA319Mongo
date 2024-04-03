@@ -8,21 +8,12 @@ Get this string from MongoDB Compass.
 
 I've included a set of tests from Postman that should facilitate easy testing of the CRUD functionality of this API. RTT03-SBA319-MongoDB.postman_collection.json
 
-The routes for GET, PUT and DELETE by _id will require the tester viewing the full list and copying the _id for any of the available documents in the given collection to be used for testing, but the body portion of the PUT for Users is quite verbose, so if you want to use the one I've included in Postman without having to edit, use the first record at the top of the DB.
-
-The only field that can be edited via PUT on a User is the username.
-
-The only field that can be edited via PUT on a Comment is the name.
-
-The only field that can be edited via PUT on a Post is the title.
 
 I've implemented simple email validation via regex and have a test to see if a User id exists before they are allowed to create a Post.
 
 For http://localhost:5500/index.html
 
-I have created and rendered a view using a view template and template engine. This allows users to easily view the usernames of all users in the DB, the title of all posts in the db and the name of all the comments in the db in one page. It's not super pretty, but could later be modified and re-used to create a drop-down for each type.
-
-
+I have created and rendered a view using a view template and template engine. This allows users to easily view the id and username of all users in the DB, the id and title of all posts in the db and the id and name of all the comments in the db in one page. It's not super pretty, but could later be modified and re-used to create a drop-down for each type.
 
 
 Credits:

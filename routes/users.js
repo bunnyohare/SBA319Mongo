@@ -61,7 +61,7 @@ router.get("/", async (req, res) => {
 // READ - GET a single user by ID
 router.get("/:id", async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findOne({ id: req.params.id });
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -75,23 +75,27 @@ router.get("/:id", async (req, res) => {
 // UPDATE - PUT to update a user by ID
 router.put("/:id", async (req, res) => {
   try {
-    await User.findByIdAndUpdate(req.params.id, req.body);
+    const user = await User.findOneAndUpdate({ id: req.params.id }, req.body);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
     res.json({ message: "User updated successfully" });
   } catch (error) {
     console.error("Error updating user:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
 // DELETE - DELETE a user by ID
 router.delete("/:id", async (req, res) => {
   try {
-    await User.findByIdAndDelete(req.params.id);
+    const user = await User.findOneAndDelete({ id: req.params.id });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
     res.json({ message: "User deleted successfully" });
   } catch (error) {
     console.error("Error deleting user:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
 module.exports = router;

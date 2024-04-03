@@ -24,7 +24,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5005/api/user/",
+					"raw": "http://localhost:5005/api/user/5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -33,7 +33,7 @@
 					"path": [
 						"api",
 						"user",
-						""
+						"5"
 					]
 				}
 			},
@@ -46,7 +46,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"name\": \"Muffin\",\n\"username\": \"Purry\",\n\"email\": \"cat@home.com\"}",
+					"raw": "{\"name\": \"Kitten Cat\",\n\"username\": \"ROAR!\",\n\"email\": \"Meow@kitty.com\",\n\"address\": {\n\"street\": \"Kattie Lane\",\n\"suite\": \"Apt 202\",\n\"city\": \"Katville\",\n\"zipcode\": \"90028-2261\",\n\"geo\": {\n\"lat\": \"-38.2398\",\n\"lng\": \"57.2243\"\n}\n},\n\"phone\": \"800-879-2134\",\n\"website\": \"kitty.com\",\n\"company\": {\n\"name\": \"CATS LLC\",\n\"catchPhrase\": \"I am really a cat!\",\n\"bs\": \"What?\"\n}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -70,13 +70,13 @@
 			"response": []
 		},
 		{
-			"name": "PUT /api/user/660311cf17d79dc0ea58a6c3?username=FooFoo",
+			"name": "PUT /api/user/ on 5005",
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{  \"id\": 1,\n  \"name\": \"Leanne Graham\",\n  \"username\": \"fsadkljf\",\n  \"email\": \"Sincere@april.biz\",\n  \"address\": {\n    \"street\": \"Kulas Light\",\n    \"suite\": \"Apt. 556\",\n    \"city\": \"Gwenborough\",\n    \"zipcode\": \"92998-3874\",\n    \"geo\": {\n      \"lat\": \"-37.3159\",\n      \"lng\": \"81.1496\"\n    }\n  },\n  \"phone\": \"1-770-736-8031 x56442\",\n  \"website\": \"hildegard.org\",\n  \"company\": {\n    \"name\": \"Romaguera-Crona\",\n    \"catchPhrase\": \"Multi-layered client-server neural-net\",\n    \"bs\": \"harness real-time e-markets\"\n  }\n}",
+					"raw": "{\n    \"website\": \"KittenBreak.org\"\n\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -84,7 +84,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5005/api/user/660311cf17d79dc0ea58a6c3",
+					"raw": "http://localhost:5005/api/user/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -93,7 +93,7 @@
 					"path": [
 						"api",
 						"user",
-						"660311cf17d79dc0ea58a6c3"
+						"1"
 					],
 					"query": [
 						{
@@ -121,7 +121,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5005/api/user/",
+					"raw": "http://localhost:5005/api/user/12",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -130,7 +130,7 @@
 					"path": [
 						"api",
 						"user",
-						""
+						"12"
 					]
 				}
 			},
@@ -154,7 +154,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5005/api/post/",
+					"raw": "http://localhost:5005/api/post/5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -163,7 +163,7 @@
 					"path": [
 						"api",
 						"post",
-						""
+						"5"
 					]
 				}
 			},
@@ -210,7 +210,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{  \"userId\": 1,\n  \"id\": 103,\n  \"title\": \"Fooood Kitty\",\n  \"body\": \"My clouder is full of hungry, but cute house cats.\"\n}",
+					"raw": "{  \"userId\": 11,\n  \"title\": \"Kitty loves food\",\n  \"body\": \"Cat, meow.\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -240,7 +240,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"_id\": {\n    \"$oid\": \"660311c317d79dc0ea58a65e\"\n  },\n  \"userId\": 1,\n  \"id\": 1,\n  \"title\": \"Foooo\",\n  \"body\": \"quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto\"\n}",
+					"raw": "{  \"title\": \"FooooBar\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -248,7 +248,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5005/api/post/660311c317d79dc0ea58a65e",
+					"raw": "http://localhost:5005/api/post/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -257,7 +257,7 @@
 					"path": [
 						"api",
 						"post",
-						"660311c317d79dc0ea58a65e"
+						"4"
 					]
 				}
 			},
@@ -270,7 +270,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"name\": \"Muffin\",\n\"username\": \"Purry\",\n\"email\": \"cat@home.com\"}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -278,7 +278,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5005/api/post",
+					"raw": "http://localhost:5005/api/post/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -286,7 +286,8 @@
 					"port": "5005",
 					"path": [
 						"api",
-						"post"
+						"post",
+						"1"
 					]
 				}
 			},
@@ -310,7 +311,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5005/api/comment/660ab980219c74bee6f37289",
+					"raw": "http://localhost:5005/api/comment/5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -319,7 +320,7 @@
 					"path": [
 						"api",
 						"comment",
-						"660ab980219c74bee6f37289"
+						"5"
 					]
 				}
 			},
@@ -332,7 +333,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"postId\": \"2\",\n\"name\": \"Purry is my cat\",\n\"email\": \"cat@meow.com\",\n\"body\": \"Cats are so awesome!\"}",
+					"raw": "{\"postId\": \"2\",\n\"name\": \"YES, KITTY! I WILL FEED YOU NOW\",\n\"email\": \"cats@meow.com\",\n\"body\": \"Cats are so totally cool!\"}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -356,13 +357,13 @@
 			"response": []
 		},
 		{
-			"name": "PUT /api/comment/660ab980219c74bee6f37289",
+			"name": "PUT /api/comment/ on 5005",
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"postId\":\"2\",\n\"name\": \"Purry my cat is!!\",\n\"email\":\"cat@meow.com\",\n\"body\":\"Cats are so awesome!\"\n}",
+					"raw": "{\n\"name\": \"Purry cat is my cat is!!\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -370,7 +371,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5005/api/comment/660ab980219c74bee6f37289",
+					"raw": "http://localhost:5005/api/comment/400",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -379,7 +380,7 @@
 					"path": [
 						"api",
 						"comment",
-						"660ab980219c74bee6f37289"
+						"400"
 					]
 				}
 			},
@@ -400,7 +401,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5005/api/comment/660ab88f26aa6c98025581c5",
+					"raw": "http://localhost:5005/api/comment/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -409,44 +410,7 @@
 					"path": [
 						"api",
 						"comment",
-						"660ab88f26aa6c98025581c5"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "PUT /api/user/660311cf17d79dc0ea58a6c3",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{  \"id\": 1,\n  \"name\": \"Leanne Graham\",\n  \"username\": \"fsadkljf\",\n  \"email\": \"Sincere@april.biz\",\n  \"address\": {\n    \"street\": \"Kulas Light\",\n    \"suite\": \"Apt. 556\",\n    \"city\": \"Gwenborough\",\n    \"zipcode\": \"92998-3874\",\n    \"geo\": {\n      \"lat\": \"-37.3159\",\n      \"lng\": \"81.1496\"\n    }\n  },\n  \"phone\": \"1-770-736-8031 x56442\",\n  \"website\": \"hildegard.org\",\n  \"company\": {\n    \"name\": \"Romaguera-Crona\",\n    \"catchPhrase\": \"Multi-layered client-server neural-net\",\n    \"bs\": \"harness real-time e-markets\"\n  }\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:5005/api/user/660311cf17d79dc0ea58a6c3",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5005",
-					"path": [
-						"api",
-						"user",
-						"660311cf17d79dc0ea58a6c3"
-					],
-					"query": [
-						{
-							"key": "username",
-							"value": "Hoppy",
-							"disabled": true
-						}
+						"1"
 					]
 				}
 			},
