@@ -19,7 +19,7 @@ I've included a set of tests from Postman that should facilitate easy testing of
 
 I've implemented simple email validation via regex and have a test to see if a User id exists before they are allowed to create a Post.
 
-For http://localhost:5500/index.html
+For http://localhost:5005/index.html
 
 I have created and rendered a view using a view template and template engine. This allows users to easily view the id and username of all users in the DB, the id and title of all posts in the db and the id and name of all the comments in the db in one page. It's not super pretty, but could later be modified and re-used to create a drop-down for each type.
 
