@@ -11,7 +11,10 @@ To test/use this API do the following:
     PORT=5005
     MONGO_URI=mongodb+srv://<MONGO_USERNAME>:<MONGO_PASSWORD>@<MONGO_DATABASE_INFO_URL>/SBA319Mongo
     ```
-Change `<MONGO_USERNAME>` to your username where you are storing the database.  Change `<MONGO_PASSWORD>` to your password where you are storing the database. And change `<MONGO_DATABASE_INFO_URL>` to the location of your database in the format: `<DATABASE_DEPLOYMENT>.<STRING>.mongodb.net`. If you deploy on https://MongoDB.com this info should be available via the `Connect` button.  Please do not use their boiler-plate driver connection as adding the `?retryWrites=true&w=majority&appName=` url parameters will cause issues with mongoose.
+  - Change `<MONGO_USERNAME>` to your username where you are storing the database.
+  - Change `<MONGO_PASSWORD>` to your password where you are storing the database
+  - Change `<MONGO_DATABASE_INFO_URL>` to the location of your database in the format: `<DATABASE_DEPLOYMENT>.<STRING>.mongodb.net`.
+  - If you deploy on https://MongoDB.com this info should be available via the `Connect` button.  Please do not use their boiler-plate driver connection as adding the `?retryWrites=true&w=majority&appName=` url parameters will cause issues with mongoose.
 
 - Run `nodemon start` to start the server. 
 
