@@ -10,8 +10,10 @@ Run nodemon start to start the server.
 
 Create a .env file which includes the following:
 
-```PORT=5005
-mongodb+srv://<MONGO_USERNAME>:<MONGO_PASSWORD>@rtt-03.xa9pn2b.mongodb.net/SBA319Mongo```
+```
+PORT=5005
+mongodb+srv://<MONGO_USERNAME>:<MONGO_PASSWORD>@rtt-03.xa9pn2b.mongodb.net/SBA319Mongo
+```
 
 
 I've included a set of tests from Postman that should facilitate easy testing of the CRUD functionality of this API. RTT03-SBA319-MongoDB.postman_collection.json
