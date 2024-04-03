@@ -11,7 +11,7 @@ Run nodemon start to start the server.
 Create a .env file which includes the following:
 
 PORT=5005
-MONGO_URI=mongodb+srv://<MONGO_USERNAME>:<MONGO_PASSWORD>@<MongoDB_DATABAS_INFO>  
+MONGO_URI=mongodb+srv://<MONGO_USERNAME>:<MONGO_PASSWORD>@MongoDB319> 
 Get this string from MongoDB Compass.
 
 I've included a set of tests from Postman that should facilitate easy testing of the CRUD functionality of this API. RTT03-SBA319-MongoDB.postman_collection.json
