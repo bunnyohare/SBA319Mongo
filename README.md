@@ -12,9 +12,9 @@ Create a .env file which includes the following:
 
 ```
 PORT=5005
-mongodb+srv://<MONGO_USERNAME>:<MONGO_PASSWORD>@rtt-03.xa9pn2b.mongodb.net/SBA319Mongo
+MONGO_URI=mongodb+srv://<MONGO_USERNAME>:<MONGO_PASSWORD>@<MONGO_DATABASE_INFO_URL>/SBA319Mongo
 ```
-
+Change <MONGO_USERNAME> to your username where you are storing the database.  Change <MONGO_PASSWORD> to your password where you are storing the database. And change <MONGO_DATABASE_INFO_URL> to the location of your database in the format: <DATABASE_DEPLOYMENT>.<STRING>.mongodb.net If you deploy on MongoDB.com this info should be available via the Connect button.  Please do not use their boiler-plate driver connection as adding the "?retryWrites=true&w=majority&appName=" url parameters will cause issues with mongoose.
 
 I've included a set of tests from Postman that should facilitate easy testing of the CRUD functionality of this API. RTT03-SBA319-MongoDB.postman_collection.json
 
@@ -29,6 +29,5 @@ I have created and rendered a view using a view template and template engine. Th
 Credits:
 
 Free content info:
-Text: Lipsum, a Lorem Ipsum text generator. https://www.lipsum.com/
+
 JSON Data: {JSON} Placeholder, Free fake and reliable API for testing and prototyping. https://jsonplaceholder.typicode.com/
-Color palette: https://coolors.co/palette/cad2c5-84a98c-52796f-354f52-2f3e46
