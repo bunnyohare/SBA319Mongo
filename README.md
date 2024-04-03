@@ -6,6 +6,8 @@ Call these collections Comments, Posts, and Users.
 
 Run npm install to get the node_modules.
 
+Run nodemon start to start the server. 
+
 Create a .env file which includes the following:
 
 PORT=5005
