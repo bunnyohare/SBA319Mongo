@@ -7,8 +7,8 @@ const User = require("../models/user");
 router.post("/", async (req, res) => {
   try {
     // Check if the user exists before allowing them to post
-    const userId = req.body.userId;
-    const user = await User.findOne({id: userId});
+    const newUserId = req.body.userId;
+    const user = await User.findOne({id: newUserId});
     if (!user) {
       return res.status(404).json({ error: "User not found. Cannot create post." });
     }
@@ -20,6 +20,7 @@ router.post("/", async (req, res) => {
 
     // Create the new post with the generated ID
     const newPostData = {
+      userId: newUserId,
       id: newId,
       title: req.body.title,
       body: req.body.body,
