@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Comment = require("../models/comment");
+const Post = require("../models/post");
 
 function isValidEmail(email) {
   // Regular expression pattern for validating email address format
@@ -12,6 +13,12 @@ function isValidEmail(email) {
 // CREATE - POST a new comment
 router.post("/", async (req, res) => {
   try {
+    // Check if the post exists before allowing them to comment on it.
+    const newPostId = req.body.postId;
+    const post = await Post.findOne({id: newPostId});
+    if (!post) {
+      return res.status(404).json({ error: "Post not found. Cannot create comment." });
+    }
     const newEmail = req.body.email;
     // Check if the email address is in the correct format
     if (!isValidEmail(newEmail)) {
@@ -27,7 +34,7 @@ router.post("/", async (req, res) => {
     const newId = highestIdComment ? highestIdComment.id + 1 : 1;
     // Create the new post with the generated ID
     const newCommentData = {
-      postID: req.body.postID,
+      postId: newPostId,
       id: newId,
       name: req.body.name,
       email: newEmail,
