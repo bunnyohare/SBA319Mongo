@@ -19,18 +19,27 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ error: "Invalid email address format" });
     }
 
+    const newUserName = req.body.username;
+    let user = await User.findOne({username: newUserName});
+    if (user) {
+      return res.status(404).json({ error: "User name already exists." });
+    }
+    user = await User.findOne({email: newEmail});
+    if (user) {
+      return res.status(404).json({ error: "User email already exists." });
+    }
      // Find the document with the highest ID
      const highestIdUser = await User.findOne({}, {}, { sort: { 'id': -1 } });
 
      // Generate a new ID by incrementing the highest ID by 1
      const newId = highestIdUser ? highestIdUser.id + 1 : 1;
-     const { name, username, address, geo, phone, website, company } = req.body;
+     const { name, address, geo, phone, website, company } = req.body;
 
      // Create the new post with the generated ID
       const newUser= new User({
         id: newId,
         name,
-        username,
+        username: newUserName,
         email: newEmail,
         address,
         geo,
